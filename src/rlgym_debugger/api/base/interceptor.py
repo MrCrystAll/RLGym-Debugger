@@ -14,8 +14,10 @@ class Interceptor(Generic[AgentID, StateType, ObsType, RewardType]):
         initial_state: StateType,
         shared_info: dict[str, Any],
     ):
-        """Function to be called each time the environment is reset. Note that this does not need to return anything,
-        the environment will call `build_obs` automatically after reset, so the initial observation for a policy will be
+        """Function to be called each time the environment is reset. 
+        Note that this does not need to return anything,
+        the environment will call `build_obs` automatically after reset,
+        so the initial observation for a policy will be
         constructed in the same way as every other observation.
 
         :param agents: List of AgentIDs for which this ObsBuilder will return an Obs
@@ -60,7 +62,8 @@ class Interceptor(Generic[AgentID, StateType, ObsType, RewardType]):
         state: StateType,
         shared_info: dict[str, Any],
     ):
-        """The function intercepts the actions and the observations used to build the actions before being sent to the env.step method
+        """The function intercepts the actions and the observations
+        used to build the actions before being sent to the env.step method
 
         :param observations: The observations used to build the action
         :type observations: dict[AgentID, ObsType]

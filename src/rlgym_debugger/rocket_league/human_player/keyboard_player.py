@@ -2,8 +2,6 @@ import keyboard
 import mouse
 import numpy as np
 
-from rlgym_debugger.api.human_player.player import DeviceInterface
-
 from rlgym.rocket_league.common_values import (
     THROTTLE,
     PITCH,
@@ -14,6 +12,8 @@ from rlgym.rocket_league.common_values import (
     JUMP,
     HANDBRAKE,
 )
+
+from rlgym_debugger.api.human_player.player import DeviceInterface
 
 BINDS = {
     "THROTTLE_UP": "w",

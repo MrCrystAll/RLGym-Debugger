@@ -1,8 +1,8 @@
 from collections.abc import Hashable
 from typing import Any, Dict, List
-from rlgym.api import ActionParser
 from operator import itemgetter
 
+from rlgym.api import ActionParser
 from rlgym_debugger.api.multi_agents.multi_agent_component import MultiAgentComponent
 
 

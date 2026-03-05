@@ -22,8 +22,8 @@ class MultiAgentComponent(ABC, Generic[ComponentType]):
     def agent_names(self) -> list[str]:
         """All the names given by the user
 
-        Returns:
-            list[str]: All the names given by the user
+        :return: All the names given by the user
+        :rtype: list[str]
         """
         return list(self._agent_name_to_component.keys())
 
@@ -31,8 +31,8 @@ class MultiAgentComponent(ABC, Generic[ComponentType]):
     def components(self) -> list[ComponentType]:
         """All the components given by the user
 
-        Returns:
-            list[ComponentType]: All the components given by the user
+        :return: All the components given by the user
+        :rtype: list[ComponentType]
         """
         return list(self._agent_name_to_component.values())
 
@@ -41,11 +41,10 @@ class MultiAgentComponent(ABC, Generic[ComponentType]):
     ) -> dict[str, list[Hashable]]:
         """Gets and sort per agent all the agents in the state that matches the name of one agent
 
-        Args:
-            agents (list[Hashable]): Agents in the state
-
-        Returns:
-            dict[str, list[Hashable]]: All state agents sorted per name
+        :param agents: Agents in the state
+        :type agents: list[Hashable]
+        :return: All state agents sorted per name
+        :rtype: dict[str, list[Hashable]]
         """
         _state_agent_per_agent: dict[str, list[Hashable]] = {
             agent_name: [] for agent_name in self.agent_names
@@ -66,16 +65,12 @@ class MultiAgentComponent(ABC, Generic[ComponentType]):
         return _state_agent_per_agent
 
     def get_agent_component(self, agent: Hashable) -> ComponentType:
-        """Gets the given state agent's component
+        """Returns the agent component
 
-        Args:
-            agent (Hashable): The state agent ID
-
-        Raises:
-            ValueError: If no values are found within the component dictionnary, this error is thrown
-
-        Returns:
-            ComponentType: The found component
+        :param agent: The agent to get the component of
+        :type agent: Hashable
+        :return: The component of the agent
+        :rtype: ComponentType
         """
         for _agent_name in self.agent_names:
             if _agent_name in str(agent):

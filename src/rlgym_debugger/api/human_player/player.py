@@ -5,7 +5,8 @@ from rlgym.api import EngineActionType
 
 
 class DeviceInterface(Generic[EngineActionType]):
-    """A class that returns an input to be used in the game, used to map a device's inputs to a environment action"""
+    """A class that returns an input to be used in the game,
+    used to map a device's inputs to a environment action"""
 
     @abstractmethod
     def get_output(self) -> EngineActionType:
