@@ -1,4 +1,3 @@
-from pdb import run
 import random
 
 from rlgym.api import RLGym
