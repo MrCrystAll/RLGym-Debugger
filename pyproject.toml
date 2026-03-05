@@ -32,3 +32,13 @@ api = [
     "rlgym-debugger-human-player @ file:./installs/api/human_player",
     "rlgym-debugger-multi-agents @ file:./installs/api/multi_agents",
 ]
+
+rocket-league = [
+    "rlgym-debugger-human-player-rocket-league @ file:./installs/rocket_league/human_player"
+]
+
+all = [
+    "rlgym-debugger-human-player @ file:./installs/api/human_player",
+    "rlgym-debugger-multi-agents @ file:./installs/api/multi_agents",
+    "rlgym-debugger-human-player-rocket-league @ file:./installs/rocket_league/human_player"
+]
