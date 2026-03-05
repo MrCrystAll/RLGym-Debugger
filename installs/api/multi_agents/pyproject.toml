@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=64.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rlgym-debugger-multi-agents"
+dynamic = ["version"]
+description = "A package to allow the creation of components handling multiple agents"
+readme = "README.md"
+authors = [
+    { name = "Mathieu Suchet", email = "msuchet63@gmail.com" }
+]
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = ["rlgym-debugger"]
+# Optional: define classifiers for PyPI
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[tool.setuptools.packages.find]
+where = ["../../../src"]
+include = ["rlgym_debugger.api.multi_agents*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "rlgym_debugger.api.multi_agents.__version__"}

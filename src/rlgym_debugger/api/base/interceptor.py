@@ -57,6 +57,7 @@ class Interceptor(Generic[AgentID, StateType, ObsType, RewardType]):
         self,
         observations: dict[AgentID, ObsType],
         actions: dict[AgentID, ObsType],
+        state: StateType,
         shared_info: dict[str, Any],
     ):
         """The function intercepts the actions and the observations used to build the actions before being sent to the env.step method
@@ -65,6 +66,8 @@ class Interceptor(Generic[AgentID, StateType, ObsType, RewardType]):
         :type observations: dict[AgentID, ObsType]
         :param actions: The actions themselves
         :type actions: dict[AgentID, ObsType]
+        :param state: The game state of the environment.
+        :type state: StateType
         :param shared_info: The shared info of the environment
         :type shared_info: dict[str, Any]
         """

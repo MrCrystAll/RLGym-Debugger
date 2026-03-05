@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=64.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rlgym-debugger"
+dynamic = ["version"]
+description = "A package to create components for the debugger"
+readme = "README.md"
+authors = [
+    { name = "Mathieu Suchet", email = "msuchet63@gmail.com" }
+]
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = ["rlgym"]
+# Optional: define classifiers for PyPI
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "rlgym_debugger.api.base.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["rlgym_debugger.api.base*"]
+
+[project.optional-dependencies]
+api = [
+    "rlgym-debugger-human-player @ file:./installs/api/human_player",
+    "rlgym-debugger-multi-agents @ file:./installs/api/multi_agents",
+]

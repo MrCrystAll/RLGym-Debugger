@@ -14,36 +14,51 @@ from rlgym.rocket_league.state_mutators import (
 from rlgym.rocket_league.done_conditions import NoopCondition, GoalCondition
 from rlgym.rocket_league.sim import RocketSimEngine
 
-from rlgym_tools.rocket_league.renderers.rocketsimvis_renderer import RocketSimVisRenderer
+from rlgym_tools.rocket_league.renderers.rocketsimvis_renderer import (
+    RocketSimVisRenderer,
+)
 
 import numpy as np
 
-from reward_printing.reward_printer import RewardPrinter
+from rlgym_debugger.api.human_player.human_player import HumanPlayer
+from rlgym_debugger.api.multi_agents.multi_agent_action_parser import (
+    MultiAgentsActionParser,
+)
+from rlgym_debugger.api.multi_agents.set_id_mutator import SetIDMutator
+from rlgym_debugger.rocket_league.human_player.keyboard_player import KeyboardInterface
+from rlgym_debugger.rocket_league.human_player.noop_action_parser import (
+    RLNoopActionParser,
+)
 
 if __name__ == "__main__":
     tick_skip = 1
-    
+
     env = RLGym(
         obs_builder=DefaultObs(),
-        action_parser=RepeatAction(LookupTableAction(), repeats=tick_skip),
-        state_mutator=MutatorSequence(FixedTeamSizeMutator(1, 1), KickoffMutator()),
+        action_parser=MultiAgentsActionParser(
+            {"human": RLNoopActionParser()}, default_component=LookupTableAction()
+        ),
+        state_mutator=MutatorSequence(
+            FixedTeamSizeMutator(1, 1),
+            KickoffMutator(),
+            SetIDMutator(["human"], ["orange-0"]),
+        ),
         reward_fn=TouchReward(),
         termination_cond=GoalCondition(),
         truncation_cond=NoopCondition(),
         transition_engine=RocketSimEngine(),
-        renderer=RocketSimVisRenderer()
+        renderer=RocketSimVisRenderer(),
     )
 
     running = True
     render = True
 
-    reward_printer = RewardPrinter()
+    human_player = HumanPlayer(KeyboardInterface(), lambda _: "human")
 
     print("Starting environment")
     while running:
         try:
             obs = env.reset()
-            reward_printer.reset(env.agents, env.state, env.shared_info)
 
             truncated = {agent: False for agent in env.agents}
             terminated = {agent: False for agent in env.agents}
@@ -52,17 +67,18 @@ if __name__ == "__main__":
                 if render:
                     env.render()
                     time.sleep(tick_skip / 120.0)
-                
+
                 actions = {
                     agent: np.asarray([random.randint(0, 89)]) for agent in env.agents
                 }
-                
-                reward_printer.intercept_actions(obs, actions, env.shared_info)
+
+                human_player.intercept_actions(obs, actions, env.state, env.shared_info)
 
                 env_return = env.step(actions)
-                reward_printer.intercept(obs, *env_return, env.shared_info)
-                
+
                 obs = env_return[0]
+                terminated = env_return[2]
+                truncated = env_return[3]
         except KeyboardInterrupt:
             print("Interruption detected")
             running = False
