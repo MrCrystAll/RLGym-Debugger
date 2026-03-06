@@ -52,7 +52,7 @@ if __name__ == "__main__":
         renderer=RocketSimVisRenderer(),
         interceptor=MultiInterceptor(
             HumanPlayer(KeyboardInterface(), lambda _: "human")
-        )
+        ),
     )
 
     running = True

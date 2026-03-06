@@ -7,6 +7,7 @@ INSTALL_PATHS = [
     "rlgym_debugger_human_player/api",
     "rlgym_debugger_human_player/rocket_league",
     "rlgym_debugger_multi_agents/api",
+    "rlgym_debugger_multi_agents/rocket_league",
 ]
 
 for install_path in INSTALL_PATHS:

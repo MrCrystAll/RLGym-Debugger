@@ -7,7 +7,9 @@ from rlgym_debugger.api.human_player import DeviceInterface
 from rlgym_debugger.api.base import Interceptor
 
 
-class HumanPlayer(Generic[ActionType], Interceptor[Hashable, Any, Any, ActionType, Any]):
+class HumanPlayer(
+    Generic[ActionType], Interceptor[Hashable, Any, Any, ActionType, Any]
+):
     """A class to allow the developer to test their own environment"""
 
     def __init__(
