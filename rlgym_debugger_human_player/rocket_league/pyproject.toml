@@ -3,26 +3,25 @@ requires = ["setuptools>=64.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "rlgym-debugger-human-player"
+name = "rlgym-debugger-human-player-rocket-league"
 dynamic = ["version"]
-description = "A package to create components for the debugger"
+description = "A package that implements a keyboard and controller interface to play in a rocket league environment"
 readme = "README.md"
 authors = [
     { name = "Mathieu Suchet", email = "msuchet63@gmail.com" }
 ]
-license = { file = "LICENSE" }
+license-files = ["LICENSE"]
 requires-python = ">=3.10"
-dependencies = ["rlgym-debugger"]
+dependencies = ["rlgym-debugger-human-player", "mouse", "keyboard", "pygame"]
 # Optional: define classifiers for PyPI
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent"
 ]
 
 [tool.setuptools.packages.find]
-where = ["../../../src"]
-include = ["rlgym_debugger.api.human_player*"]
+where = ["src"]
+include = ["rlgym_debugger.rocket_league.human_player*"]
 
 [tool.setuptools.dynamic]
-version = {attr = "rlgym_debugger.api.human_player.__version__"}
+version = {file = "VERSION.txt"}

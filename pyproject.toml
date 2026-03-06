@@ -10,35 +10,39 @@ readme = "README.md"
 authors = [
     { name = "Mathieu Suchet", email = "msuchet63@gmail.com" }
 ]
-license = { file = "LICENSE" }
+license-files = ["LICENSE"]
 requires-python = ">=3.10"
 dependencies = ["rlgym"]
 # Optional: define classifiers for PyPI
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent"
 ]
 
 [tool.setuptools.dynamic]
-version = {attr = "rlgym_debugger.api.base.__version__"}
+version = {file = "rlgym_debugger/api/VERSION.txt"}
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["rlgym_debugger/api/src"]
 include = ["rlgym_debugger.api.base*"]
 
 [project.optional-dependencies]
 api = [
-    "rlgym-debugger-human-player @ file:./installs/api/human_player",
-    "rlgym-debugger-multi-agents @ file:./installs/api/multi_agents",
+    "rlgym-debugger-human-player @ file:./rlgym_debugger_human_player/api",
+    "rlgym-debugger-multi-agents @ file:./rlgym_debugger_multi_agents/api",
 ]
 
 rocket-league = [
-    "rlgym-debugger-human-player-rocket-league @ file:./installs/rocket_league/human_player"
+    "rlgym-debugger-human-player-rocket-league @ file:./rlgym_debugger_human_player/rocket_league"
+]
+
+human_player = [
+    "rlgym-debugger-human-player @ file:./installs/api/human_player",
+    "rlgym-debugger-human-player-rocket-league @ file:./rlgym_debugger_human_player/rocket_league"
 ]
 
 all = [
-    "rlgym-debugger-human-player @ file:./installs/api/human_player",
-    "rlgym-debugger-multi-agents @ file:./installs/api/multi_agents",
-    "rlgym-debugger-human-player-rocket-league @ file:./installs/rocket_league/human_player"
+    "rlgym-debugger-human-player @ file:./rlgym_debugger_human_player/api",
+    "rlgym-debugger-human-player-rocket-league @ file:./installs/rocket_league/human_player",
+    "rlgym-debugger-multi-agents @ file:./rlgym_debugger_multi_agents/api"
 ]

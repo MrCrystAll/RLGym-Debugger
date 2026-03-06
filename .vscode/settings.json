@@ -1,5 +1,8 @@
 {
   "python.analysis.extraPaths": [
-    "./src",
+    "rlgym_debugger/api/src",
+    "rlgym_debugger_human_player/api/src",
+    "rlgym_debugger_human_player/rocket_league/src",
+    "rlgym_debugger_multi_agents/api/src",
   ]
 }
