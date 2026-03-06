@@ -14,7 +14,7 @@ class Interceptor(Generic[AgentID, StateType, ObsType, RewardType]):
         initial_state: StateType,
         shared_info: dict[str, Any],
     ):
-        """Function to be called each time the environment is reset. 
+        """Function to be called each time the environment is reset.
         Note that this does not need to return anything,
         the environment will call `build_obs` automatically after reset,
         so the initial observation for a policy will be
