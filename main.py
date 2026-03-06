@@ -4,7 +4,7 @@ import time
 from rlgym.api import RLGym
 
 from rlgym.rocket_league.obs_builders import DefaultObs
-from rlgym.rocket_league.action_parsers import LookupTableAction, RepeatAction
+from rlgym.rocket_league.action_parsers import LookupTableAction
 from rlgym.rocket_league.reward_functions import TouchReward
 from rlgym.rocket_league.state_mutators import (
     FixedTeamSizeMutator,
@@ -20,6 +20,8 @@ from rlgym_tools.rocket_league.renderers.rocketsimvis_renderer import (
 
 import numpy as np
 
+from rlgym_debugger.api.base.intercepted_env import InterceptedRLGym
+from rlgym_debugger.api.base.multi_interceptor import MultiInterceptor
 from rlgym_debugger.api.human_player.human_player import HumanPlayer
 from rlgym_debugger.api.multi_agents.multi_agent_action_parser import (
     MultiAgentsActionParser,
@@ -33,7 +35,7 @@ from rlgym_debugger.rocket_league.human_player.noop_action_parser import (
 if __name__ == "__main__":
     tick_skip = 1
 
-    env = RLGym(
+    env = InterceptedRLGym(
         obs_builder=DefaultObs(),
         action_parser=MultiAgentsActionParser(
             {"human": RLNoopActionParser()}, default_component=LookupTableAction()
@@ -48,12 +50,13 @@ if __name__ == "__main__":
         truncation_cond=NoopCondition(),
         transition_engine=RocketSimEngine(),
         renderer=RocketSimVisRenderer(),
+        interceptor=MultiInterceptor(
+            HumanPlayer(KeyboardInterface(), lambda _: "human")
+        )
     )
 
     running = True
     render = True
-
-    human_player = HumanPlayer(KeyboardInterface(), lambda _: "human")
 
     print("Starting environment")
     while running:
@@ -71,8 +74,6 @@ if __name__ == "__main__":
                 actions = {
                     agent: np.asarray([random.randint(0, 89)]) for agent in env.agents
                 }
-
-                human_player.intercept_actions(obs, actions, env.state, env.shared_info)
 
                 env_return = env.step(actions)
 

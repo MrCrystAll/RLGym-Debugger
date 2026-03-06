@@ -1,10 +1,10 @@
 from abc import abstractmethod
 from typing import Any, Generic
 
-from rlgym.api import AgentID, StateType, ObsType, RewardType
+from rlgym.api import AgentID, StateType, ObsType, RewardType, ActionType
 
 
-class Interceptor(Generic[AgentID, StateType, ObsType, RewardType]):
+class Interceptor(Generic[AgentID, StateType, ObsType, ActionType, RewardType]):
     """The base class to intercept and act on the environment"""
 
     @abstractmethod
@@ -58,7 +58,7 @@ class Interceptor(Generic[AgentID, StateType, ObsType, RewardType]):
     def intercept_actions(
         self,
         observations: dict[AgentID, ObsType],
-        actions: dict[AgentID, ObsType],
+        actions: dict[AgentID, ActionType],
         state: StateType,
         shared_info: dict[str, Any],
     ):

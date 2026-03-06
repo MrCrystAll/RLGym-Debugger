@@ -1,18 +1,19 @@
 from typing import Any, Generic
 
-from rlgym.api import AgentID, StateType, ObsType, RewardType
+from rlgym.api import AgentID, StateType, ObsType, RewardType, ActionType
 
 from rlgym_debugger.api.base.interceptor import Interceptor
 
 
 class MultiInterceptor(
-    Generic[AgentID, StateType, ObsType, RewardType],
-    Interceptor[AgentID, StateType, ObsType, RewardType],
+    Generic[AgentID, StateType, ObsType, ActionType, RewardType],
+    Interceptor[AgentID, StateType, ObsType, ActionType, RewardType],
 ):
     """This class is used to aggregate multiple interceptors more easily"""
 
     def __init__(
-        self, *interceptors: Interceptor[AgentID, StateType, ObsType, RewardType]
+        self,
+        *interceptors: Interceptor[AgentID, StateType, ObsType, ActionType, RewardType],
     ) -> None:
         self.interceptors = interceptors
 
@@ -28,7 +29,7 @@ class MultiInterceptor(
     def intercept_actions(
         self,
         observations: dict[AgentID, ObsType],
-        actions: dict[AgentID, ObsType],
+        actions: dict[AgentID, ActionType],
         state: StateType,
         shared_info: dict[str, Any],
     ):
