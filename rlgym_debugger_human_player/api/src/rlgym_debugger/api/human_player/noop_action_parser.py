@@ -17,8 +17,9 @@ class NoopActionParser(
         AgentID, EngineActionType, EngineActionType, StateType, ActionSpaceType
     ],
 ):
-    """A parser that only returns the action, this is an abstract class,
-    you need to implement it for your environment with the size of your engine action"""
+    """A parser that only returns the action, this is an abstract class.
+    
+    You need to implement it for your environment with the size of your engine action"""
 
     def parse_actions(
         self,
