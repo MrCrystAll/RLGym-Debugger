@@ -4,5 +4,6 @@
     "rlgym_debugger_human_player/api/src",
     "rlgym_debugger_human_player/rocket_league/src",
     "rlgym_debugger_multi_agents/api/src",
+    "rlgym_debugger_multi_agents/rocket_league/src",
   ]
 }

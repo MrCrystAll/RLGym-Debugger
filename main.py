@@ -26,7 +26,7 @@ from rlgym_debugger.api.human_player.human_player import HumanPlayer
 from rlgym_debugger.api.multi_agents.multi_agent_action_parser import (
     MultiAgentsActionParser,
 )
-from rlgym_debugger.api.multi_agents.set_id_mutator import SetIDMutator
+from rlgym_debugger.rocket_league.multi_agents.set_id_mutator import SetIDMutator
 from rlgym_debugger.rocket_league.human_player.keyboard_player import KeyboardInterface
 from rlgym_debugger.rocket_league.human_player.noop_action_parser import (
     RLNoopActionParser,

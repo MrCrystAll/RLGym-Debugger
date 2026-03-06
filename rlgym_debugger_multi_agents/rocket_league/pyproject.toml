@@ -3,16 +3,16 @@ requires = ["setuptools>=64.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "rlgym-debugger-human-player-rocket-league"
+name = "rlgym-debugger-multi-agents-rocket-league"
 dynamic = ["version"]
-description = "A package that implements a keyboard and controller interface to play in a rocket league environment"
+description = "A package to use the Multi agents API of the debugger in Rocket League"
 readme = "README.md"
 authors = [
     { name = "Mathieu Suchet", email = "msuchet63@gmail.com" }
 ]
 license-files = ["LICENSE"]
 requires-python = ">=3.10"
-dependencies = ["rlgym-debugger-human-player", "rlgym[rl-sim]", "mouse", "keyboard", "pygame"]
+dependencies = ["rlgym-debugger-multi-agents", "rlgym[rl-sim]"]
 # Optional: define classifiers for PyPI
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -21,7 +21,7 @@ classifiers = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["rlgym_debugger.rocket_league.human_player*"]
+include = ["rlgym_debugger.rocket_league.multi_agents*"]
 
 [tool.setuptools.dynamic]
 version = {file = "VERSION.txt"}

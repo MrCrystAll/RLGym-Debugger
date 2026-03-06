@@ -4,6 +4,8 @@ from rlgym.rocket_league.api import GameState
 
 
 class SetIDMutator(StateMutator[GameState]):
+    """A class to modify the ids of the agents"""
+    
     def __init__(self, blue_agents: list[str], orange_agents: list[str]) -> None:
         self.blue_agents = blue_agents
         self.orange_agents = orange_agents
@@ -17,5 +19,3 @@ class SetIDMutator(StateMutator[GameState]):
             else:
                 state.cars[self.orange_agents[n_orange]] = state.cars.pop(agent)
                 n_orange += 1
-
-        print(list(state.cars.keys()))

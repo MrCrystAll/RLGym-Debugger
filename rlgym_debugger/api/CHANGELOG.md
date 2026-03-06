@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added the `MultiInterceptor` class to aggregate interceptors together more easily
+- Added the `InterceptedRLGym` class to make integration easier with existing frameworks
+
+### Changed
+
+- The `Interceptor` class now has 5 arguments for the Generic class -> ActionType (Breaking change!)
 
 ## [0.1.1] - 06-03-2026
 
